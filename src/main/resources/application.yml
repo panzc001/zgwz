@@ -1,10 +1,11 @@
 server:
-  port: 8080
-
+  port: 8088
+  servlet:
+    context-path: /zgmanage
 spring:
   datasource:
     name: test
-    url: jdbc:mysql://cdb-2svcm9fw.bj.tencentcdb.com:10039/gzwz
+    url: jdbc:mysql://cdb-2svcm9fw.bj.tencentcdb.com:10039/gzwz?useSSL=false&characterEncoding=utf-8&jdbcCompliantTruncation=false&zeroDateTimeBehavior=convertToNull
     username: root
     password: gsroot123
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -26,10 +27,17 @@ spring:
     pool-prepared-statements: false
     max-pool-prepared-statement-per-connection-size: 20
     ## 该配置节点为独立的节点，有很多同学容易将这个配置放在spring的节点下，导致配置无法被识别
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: null
 mybatis:
   configuration:
       #配置项：开启下划线到驼峰的自动转换. 作用：将数据库字段根据驼峰规则自动注入到对象属性。
     map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.gsroot.zgwz.model
 
     #pagehelper
 pagehelper:
